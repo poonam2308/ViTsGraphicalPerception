@@ -132,7 +132,7 @@ def test_model(model, model_name, task_name, exp_type, test_loader):
         m_error = testingEpochOne(model, test_loader, device)
     json_data = {'Model': model_name, 'Task_name': task_name, 'Experiment_type': exp_type, 'MLAE': m_error}
     # Write JSON file
-    file_name = 'results/' + model_name + 'pretrained' + exp_type + '.json'
+    file_name = 'results/' + model_name + 'trained' + exp_type + '.json'
     with open(file_name, 'w', ) as outfile:
         json.dump(json_data, outfile)
     return m_error
