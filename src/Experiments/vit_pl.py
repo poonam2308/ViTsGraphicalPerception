@@ -6,15 +6,20 @@ from torchvision import transforms
 from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
 from src.Datasets.position_length_data import pl_data_generation, pl_normalization_data, PositionLengthData
 from src.Models.vit import ViTRegression
+from src.config_utils import get_args_parser
 
+args = get_args_parser()
+args = args.parse_args()
 FIGURE4 = 'Figure4.'
 DATATYPE_LIST = ['data_to_type1', 'data_to_type2', 'data_to_type3','data_to_type4','data_to_type5']
 NOISE = True
 # DATA GENERATION
 for i in range(len(DATATYPE_LIST)):
     DATATYPE = eval(FIGURE4 + DATATYPE_LIST[i])
-    X_train, y_train, X_val, y_val, X_test, y_test = pl_data_generation(DATATYPE, NOISE=True, train_target=60000,
-                                                                        val_target=20000, test_target=20000)
+    X_train, y_train, X_val, y_val, X_test, y_test = pl_data_generation(DATATYPE, NOISE=True,
+                                                                        train_target=args.train_target,
+                                                                        val_target=args.val_target,
+                                                                        test_target=args.test_target)
     # Normalize Data In-place
     X_train = pl_normalization_data(X_train)
     y_train = pl_normalization_data(y_train)
@@ -42,9 +47,9 @@ for i in range(len(DATATYPE_LIST)):
     val_dataset = PositionLengthData(X_val, y_val, transform=transform, channels =True)
     test_dataset = PositionLengthData(X_test, y_test, transform=transform, channels =True)
 
-    train_loader = DataLoader(train_dataset, 32, shuffle=True)
-    val_loader = DataLoader(val_dataset, 32, shuffle=True)
-    test_loader = DataLoader(test_dataset, 32, shuffle=True)
+    train_loader = DataLoader(train_dataset, args.batch_size, shuffle=True)
+    val_loader = DataLoader(val_dataset, args.batch_size, shuffle=False)
+    test_loader = DataLoader(test_dataset, args.batch_size, shuffle=False)
 
     # Instantiate the model
     vit_model = ViTRegression(image_size=(224, 224), patch_size=(8, 8), num_classes=5, dim=192, depth=12,
@@ -55,11 +60,13 @@ for i in range(len(DATATYPE_LIST)):
 
     criterion = nn.MSELoss()
 
-    optimizer = torch.optim.SGD(vit_model.parameters(), lr=0.0001, weight_decay=1e-6, momentum=0.9, nesterov=True)
+    optimizer = torch.optim.SGD(vit_model.parameters(), lr=args.lr,
+                                weight_decay=args.weight_decay,
+                                momentum=args.momentum, nesterov=args.nesterov)
     training_loss = []
     validation_loss = []
 
-    for epoch in range(100):
+    for epoch in range(args.epoch):
         train_loss = trainingEpoch(vit_model, train_loader, criterion, optimizer, epoch, device)
         training_loss.append(train_loss)
         val_loss = validationEpoch(vit_model, val_loader, criterion, epoch, device)

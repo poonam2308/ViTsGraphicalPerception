@@ -53,8 +53,8 @@ for i in range(len(DATATYPE_LIST)):
     test_dataset = WeberData(X_test, y_test, transform=transform, channels=True)
 
     train_loader = DataLoader(train_dataset, args.batch_size, shuffle=True)
-    val_loader = DataLoader(val_dataset, args.batch_size, shuffle=True)
-    test_loader = DataLoader(test_dataset, args.batch_size, shuffle=True)
+    val_loader = DataLoader(val_dataset, args.batch_size, shuffle=False)
+    test_loader = DataLoader(test_dataset, args.batch_size, shuffle=False)
 
     swin_model = SwinForImageClassification.from_pretrained("microsoft/swin-tiny-patch4-window7-224")
     swin_model.classifier = torch.nn.Linear(swin_model.config.hidden_size, args.num_classes)  # REGRESSION

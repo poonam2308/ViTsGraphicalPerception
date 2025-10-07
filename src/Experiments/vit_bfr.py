@@ -6,15 +6,20 @@ from src.Datasets.bar_frame_rectangle_data import bf_data_generation, bf_normali
 from torchvision import transforms
 from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
 from src.Models.vit import ViTRegression
+from src.config_utils import get_args_parser
 
+args = get_args_parser()
+args = args.parse_args()
 FIGURE12 = 'Figure12.'
 DATATYPE_LIST = ['data_to_bars', 'data_to_framed_rectangles']
 NOISE = True
 # DATA GENERATION
 for i in range(len(DATATYPE_LIST)):
     DATATYPE = eval(FIGURE12 + DATATYPE_LIST[i])
-    X_train, y_train, X_val, y_val, X_test, y_test = bf_data_generation(DATATYPE, NOISE=True, train_target=60000,
-                                                                        val_target=20000, test_target=20000)
+    X_train, y_train, X_val, y_val, X_test, y_test = bf_data_generation(DATATYPE, NOISE=True,
+                                                                        train_target=args.train_target,
+                                                                        val_target=args.val_target,
+                                                                        test_target=args.test_target)
     # Normalize Data In-place
     X_train = bf_normalization_data(X_train)
     y_train = bf_normalization_data(y_train)
@@ -42,9 +47,9 @@ for i in range(len(DATATYPE_LIST)):
     val_dataset = BarFrameRectData(X_val, y_val, transform=transform, channels=True)
     test_dataset = BarFrameRectData(X_test, y_test, transform=transform, channels=True)
 
-    train_loader = DataLoader(train_dataset, 32, shuffle=True)
-    val_loader = DataLoader(val_dataset, 32, shuffle=True)
-    test_loader = DataLoader(test_dataset, 32, shuffle=True)
+    train_loader = DataLoader(train_dataset, args.batch_size, shuffle=True)
+    val_loader = DataLoader(val_dataset, args.batch_size, shuffle=False)
+    test_loader = DataLoader(test_dataset, args.batch_size, shuffle=False)
 
     # Instantiate the model
     # vit_model = ViTRegression(image_size=(224, 224), patch_size=(16, 16), num_classes=2, dim=512, depth=8,
@@ -57,16 +62,18 @@ for i in range(len(DATATYPE_LIST)):
 
     criterion = nn.MSELoss()
 
-    optimizer = torch.optim.SGD(vit_model.parameters(), lr=0.0001, weight_decay=1e-6, momentum=0.9, nesterov=True)
+    optimizer = torch.optim.SGD(vit_model.parameters(),  lr=args.lr,
+                                weight_decay=args.weight_decay,
+                                momentum=args.momentum, nesterov=args.nesterov)
     training_loss = []
     validation_loss = []
 
-    for epoch in range(100):
+    for epoch in range(args.epoch):
         train_loss = trainingEpoch(vit_model, train_loader, criterion, optimizer, epoch, device)
         training_loss.append(train_loss)
         val_loss = validationEpoch(vit_model, val_loader, criterion, epoch, device)
         validation_loss.append(val_loss)
-        torch.save(vit_model.state_dict(), 'chkpt/deit/vit3wn_' + DATATYPE_LIST[i] + '.pth')
+        torch.save(vit_model.state_dict(), 'chkpt/vit/vit3wn_' + DATATYPE_LIST[i] + '.pth')
 
     plt.figure()
     plt.plot(training_loss, label='training')
@@ -75,7 +82,7 @@ for i in range(len(DATATYPE_LIST)):
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
     plt.title("training and validation loss")
-    plt.savefig('trainingplots/deit/vit3wn_' + DATATYPE_LIST[i] + '.png')
+    plt.savefig('trainingplots/vit/vit3wn_' + DATATYPE_LIST[i] + '.png')
 
     MLAE = testingEpoch(vit_model, test_loader, device)
     print("MLAE", round(MLAE, 2))

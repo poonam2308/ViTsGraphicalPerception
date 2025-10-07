@@ -56,8 +56,8 @@ for i in range(len(DATATYPE_LIST)):
     test_dataset = PerceptionDataset(X_test, y_test, transform=transform, channels=True)
 
     train_loader = DataLoader(train_dataset, args.batch_size, shuffle=True)
-    val_loader = DataLoader(val_dataset, args.batch_size, shuffle=True)
-    test_loader = DataLoader(test_dataset, args.batch_size, shuffle=True)
+    val_loader = DataLoader(val_dataset, args.batch_size, shuffle=False)
+    test_loader = DataLoader(test_dataset, args.batch_size, shuffle=False)
 
     # Instantiate the model
     cvt_model = CvtForImageClassification.from_pretrained("microsoft/cvt-13")

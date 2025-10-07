@@ -8,8 +8,10 @@ from torchvision import transforms
 from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpochOneTask
 from src.Datasets.perceptiondata import data_generation, normalization_data, PerceptionDataset
 from src.Models.swin import SwinRegression
+from src.config_utils import get_args_parser
 
-
+args = get_args_parser()
+args = args.parse_args()
 FIGURE1 = 'Figure1.'
 DATATYPE_LIST = ['position_common_scale', 'position_non_aligned_scale', 'length', 'direction', 'angle', 'area',
                  'volume', 'curvature', 'shading']
@@ -40,9 +42,9 @@ for i, task in enumerate(DATATYPE_LIST):
         os.makedirs(os.path.dirname(stats_path), exist_ok=True)
 
         X_train, y_train, X_val, y_val, X_test, y_test = data_generation(
-            DATATYPE, FLAGS=FLAGS, NOISE=NOISE, train_target=120000,
-            val_target=40000, test_target=40000
-        )
+            DATATYPE, FLAGS=FLAGS, NOISE=NOISE, train_target=args.train_target,
+            val_target=args.val_target,
+            test_target=args.test_target)
         # Normalize Data In-place
         X_train = normalization_data(X_train)
         y_train = normalization_data(y_train)
@@ -74,9 +76,9 @@ for i, task in enumerate(DATATYPE_LIST):
         val_dataset = PerceptionDataset(X_val, y_val, transform=transform, channels=True)
         test_dataset = PerceptionDataset(X_test, y_test, transform=transform, channels=True)
 
-        train_loader = DataLoader(train_dataset, 16, shuffle=True)
-        val_loader = DataLoader(val_dataset, 16, shuffle=True)
-        test_loader = DataLoader(test_dataset, 16, shuffle=True)
+        train_loader = DataLoader(train_dataset, args.batch_size, shuffle=True)
+        val_loader = DataLoader(val_dataset, args.batch_size, shuffle=False)
+        test_loader = DataLoader(test_dataset, args.batch_size, shuffle=False)
 
         # Instantiate the model
 
@@ -97,11 +99,13 @@ for i, task in enumerate(DATATYPE_LIST):
 
         criterion = nn.MSELoss()
 
-        optimizer = torch.optim.SGD(swin_model.parameters(), lr=0.0001, weight_decay=1e-6, momentum=0.9, nesterov=True)
+        optimizer = torch.optim.SGD(swin_model.parameters(),lr=args.lr,
+                                weight_decay=args.weight_decay,
+                                momentum=args.momentum, nesterov=args.nesterov)
         training_loss = []
         validation_loss = []
 
-        for epoch in range(100):
+        for epoch in range(args.epoch):
             train_loss = trainingEpoch(swin_model, train_loader, criterion, optimizer, epoch, device)
             training_loss.append(train_loss)
             val_loss = validationEpoch(swin_model, val_loader, criterion, epoch, device)
