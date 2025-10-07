@@ -3,6 +3,7 @@ import scipy as sp
 import scipy.stats
 from matplotlib import gridspec
 import matplotlib.pyplot as plt
+from src.ClevelandMcGill.figure1 import Figure1
 
 experiments = ['Figure1.position_common_scale',
                'Figure1.position_non_aligned_scale',

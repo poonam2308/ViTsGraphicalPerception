@@ -2,6 +2,7 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import gridspec
+from src.ClevelandMcGill.weber import Weber
 
 sys.path.append('../')
 all_data = []
@@ -119,4 +120,4 @@ fig.legend(
     ncol=len(classifiers3) - 2,
     fontsize=8
 )
-plt.savefig('weber_analysis_wodeit.pdf', bbox_inches='tight', pad_inches=0.2)
+plt.savefig('weber_analysis.pdf', bbox_inches='tight', pad_inches=0.2)

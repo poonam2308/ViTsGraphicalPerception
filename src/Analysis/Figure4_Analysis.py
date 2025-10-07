@@ -5,6 +5,7 @@ from matplotlib import gridspec
 
 from src.ClevelandMcGill.figure4 import Figure4
 
+# if there is our of bounds, try running again
 sys.path.append('../')
 
 classifiers = ['CvT', 'Swin', 'vViT']

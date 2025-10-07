@@ -4,8 +4,9 @@ import os
 import skimage.draw
 import sys
 
+from src.util import Util
+
 sys.path.append('../')
-from util import Util
 
 
 class Figure1:
