@@ -4,8 +4,8 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
 from src.Models.cvt import CvTRegression
-from one_epoch_run import trainingEpoch, validationEpoch, testingEpochOne
-from weber_data import WeberData, wb_normalization_data, wb_data_generation
+from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpochOne
+from src.Datasets.weber_data import WeberData, wb_normalization_data, wb_data_generation
 
 WEBER = 'Weber.'
 DATATYPE_LIST = ['base10', 'base100', 'base1000']

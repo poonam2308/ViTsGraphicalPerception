@@ -5,8 +5,8 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 
 from src.Models.cvt import CvTRegression
-from one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
-from position_length_data import pl_normalization_data, pl_data_generation, PositionLengthData
+from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
+from src.Datasets.position_length_data import pl_normalization_data, pl_data_generation, PositionLengthData
 
 FIGURE4 = 'Figure4.'
 DATATYPE_LIST = ['data_to_type1', 'data_to_type2', 'data_to_type3', 'data_to_type4', 'data_to_type5']

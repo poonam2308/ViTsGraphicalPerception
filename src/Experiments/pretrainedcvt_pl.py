@@ -6,10 +6,9 @@ from transformers import CvtForImageClassification
 
 from torchvision import transforms
 
-from one_epoch_run import testingEpoch_pre, trainingEpoch_pre, validationEpoch_pre
-from position_length_data import pl_normalization_data, pl_data_generation, PositionLengthData
-import wandb
-from config_utils import get_args_parser, init_wandb
+from src.Models.one_epoch_run import testingEpoch_pre, trainingEpoch_pre, validationEpoch_pre
+from src.Datasets.position_length_data import pl_normalization_data, pl_data_generation, PositionLengthData
+from src.config_utils import get_args_parser, init_wandb
 
 args = get_args_parser()
 args = args.parse_args()

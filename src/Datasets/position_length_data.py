@@ -1,9 +1,9 @@
 import torch
 import numpy as np
 import time
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import Dataset
 
-from src.ClevelandMcGill import Figure4
+from src.ClevelandMcGill.figure4 import Figure4
 
 # reference : Run_position_length_from scratch
 def pl_normalization_data(x):

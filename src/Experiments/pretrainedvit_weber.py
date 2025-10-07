@@ -5,11 +5,11 @@ from torch.utils.data import DataLoader
 from transformers import ViTForImageClassification
 
 from torchvision import transforms
-from one_epoch_run import trainingEpoch_pre, validationEpoch_pre, \
+from src.Models.one_epoch_run import trainingEpoch_pre, validationEpoch_pre, \
     testingEpochOne_pre
-from weber_data import wb_data_generation, wb_normalization_data, WeberData
+from src.Datasets.weber_data import wb_data_generation, wb_normalization_data, WeberData
 import wandb
-from config_utils import get_args_parser, init_wandb
+from src.config_utils import get_args_parser, init_wandb
 
 args = get_args_parser()
 args = args.parse_args()

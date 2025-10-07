@@ -5,9 +5,9 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 from transformers import ViTForImageClassification
 import wandb
-from config_utils import get_args_parser, init_wandb
-from one_epoch_run import trainingEpoch_pre, validationEpoch_pre, testingEpoch_pre
-from position_length_data import pl_data_generation, pl_normalization_data, PositionLengthData
+from src.config_utils import get_args_parser, init_wandb
+from src.Models.one_epoch_run import trainingEpoch_pre, validationEpoch_pre, testingEpoch_pre
+from src.Datasets.position_length_data import pl_data_generation, pl_normalization_data, PositionLengthData
 
 args = get_args_parser()
 args = args.parse_args()

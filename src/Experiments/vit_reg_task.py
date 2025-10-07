@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from one_epoch_run import trainingEpoch, validationEpoch, testingEpochTask
-from perceptiondata import data_generation, normalization_data, PerceptionDataset
+from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpochTask
+from src.Datasets.perceptiondata import data_generation, normalization_data, PerceptionDataset
 from src.Models.vit import ViTRegression
 
 FIGURE1 = 'Figure1.'

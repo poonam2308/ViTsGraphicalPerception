@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from one_epoch_run import trainingEpoch, validationEpoch, testingEpochOne
+from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpochOne
 from src.Models.vit import ViTRegression
-from weber_data import wb_data_generation, wb_normalization_data, WeberData
+from src.Datasets.weber_data import wb_data_generation, wb_normalization_data, WeberData
 
 WEBER = 'Weber.'
 DATATYPE_LIST = ['base10', 'base100', 'base1000']

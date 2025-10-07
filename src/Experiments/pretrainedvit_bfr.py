@@ -2,11 +2,11 @@ import torch
 import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from bar_frame_rectangle_data import bf_data_generation, bf_normalization_data, BarFrameRectData
+from src.Datasets.bar_frame_rectangle_data import bf_data_generation, bf_normalization_data, BarFrameRectData
 from torchvision import transforms
-from one_epoch_run import  testingEpoch_pre, validationEpoch_pre, trainingEpoch_pre
+from src.Models.one_epoch_run import  testingEpoch_pre, validationEpoch_pre, trainingEpoch_pre
 from transformers import ViTForImageClassification
-from config_utils import get_args_parser, init_wandb
+from src.config_utils import get_args_parser, init_wandb
 import wandb
 
 args = get_args_parser()

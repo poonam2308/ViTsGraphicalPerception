@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 import time
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import Dataset
 
 
 # reference : run_weber_from_scratch

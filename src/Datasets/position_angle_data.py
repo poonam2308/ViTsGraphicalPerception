@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 import time
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import Dataset
 
 from src.ClevelandMcGill.figure3 import Figure3
 

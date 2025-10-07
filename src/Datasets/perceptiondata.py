@@ -2,7 +2,7 @@ import torch
 import numpy as np
 import time
 from torch.utils.data import Dataset
-from ClevelandMcGill.figure1 import Figure1
+from src.ClevelandMcGill.figure1 import Figure1
 
 # Reference : run_regression_from_scratch_multi
 def normalization_data(x):
@@ -106,52 +106,3 @@ class PerceptionDataset(Dataset):
             img= self.transform(img)
 
         return {'image':img, 'label': label}
-
-#
-# DATATYPE = eval('Figure1.position_common_scale')
-# NOISE = True
-# # DATA GENERATION
-# X_train, y_train, X_val, y_val, X_test, y_test = data_generation(DATATYPE, NOISE = True)
-# # Normalize Data In-place
-# X_train = normalization_data(X_train)
-# y_train = normalization_data(y_train)
-#
-# X_val = normalization_data(X_val)
-# y_val = normalization_data(y_val)
-#
-# X_test = normalization_data(X_test)
-# y_test = normalization_data(y_test)
-#
-# X_train -= 0.5
-# X_val -= 0.5
-# X_test -= 0.5
-#
-# print('memory usage', (X_train.element_size() * X_train.nelement() +
-#                       X_val.element_size() * X_val.nelement() +
-#                       X_test.element_size() * X_test.nelement() +
-#                       y_train.element_size() * y_train.nelement() +
-#                       y_val.element_size() * y_val.nelement() +
-#                       y_test.element_size() * y_test.nelement()) / (1024 * 1024), 'MB')
-
-
-############################################
-# Define a transformation to convert images into patches (adjust parameters as needed)
-# transform = transforms.Compose([
-#     transforms.Resize((224, 224))
-# ])
-#
-# train_dataset = PerceptionDataset(X_train, y_train, transform=transform)
-#
-# batch_size = 64
-#
-# train_loader = DataLoader(train_dataset, 64, shuffle =True)
-# # Iterate through the data loader in your training loop
-# for batch in train_loader:
-#     # Access the input and target tensors
-#     x_batch = batch['image']
-#     y_batch = batch['label']
-#
-#     # Your training code here
-#     print("Batch input tensor shape:", x_batch.shape)
-#     print("Batch target tensor shape:", y_batch.shape)
-#     break  # For illustration purposes, breaking after the first batch

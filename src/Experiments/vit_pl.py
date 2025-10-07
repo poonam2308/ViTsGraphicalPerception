@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
-from position_length_data import pl_data_generation, pl_normalization_data, PositionLengthData
+from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
+from src.Datasets.position_length_data import pl_data_generation, pl_normalization_data, PositionLengthData
 from src.Models.vit import ViTRegression
 
 FIGURE4 = 'Figure4.'

@@ -3,7 +3,7 @@ import numpy as np
 import time
 from torch.utils.data import DataLoader, Dataset
 
-from ClevelandMcGill.figure12 import Figure12
+from src.ClevelandMcGill.figure12 import Figure12
 
 # reference : Run_bar_framed_rectangle_from_scratch
 def bf_normalization_data(x):

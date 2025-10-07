@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
-from position_angle_data import pa_data_generation, pa_normalization_data, PositionAngleData
+from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
+from src.Datasets.position_angle_data import pa_data_generation, pa_normalization_data, PositionAngleData
 from src.Models.swin import SwinRegression
 
 FIGURE12 = 'Figure3.'

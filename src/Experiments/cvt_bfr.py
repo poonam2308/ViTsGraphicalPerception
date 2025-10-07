@@ -2,9 +2,9 @@ import torch
 import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from bar_frame_rectangle_data import bf_data_generation, bf_normalization_data, BarFrameRectData
+from src.Datasets.bar_frame_rectangle_data import bf_data_generation, bf_normalization_data, BarFrameRectData
 from torchvision import transforms
-from one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
+from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
 from src.Models.cvt import CvTRegression
 
 FIGURE12 = 'Figure12.'
