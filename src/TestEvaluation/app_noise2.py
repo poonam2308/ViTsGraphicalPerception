@@ -4,6 +4,7 @@ import gradio as gr
 import torch
 from torch.utils.data import DataLoader
 import sys
+sys.path.append("../../")
 from torchvision import transforms
 from src.Models.cvt import CvTRegression
 from src.Models.one_epoch_run import testingEpoch, testingEpochOne
@@ -19,7 +20,7 @@ import os
 np.random.seed(0)
 torch.manual_seed(0)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-sys.path.append("../../")
+
 from src.Datasets.testdataset import TestDataset, test_normalization_data, \
     test_pl_data_generation, test_pa_data_generation, test_bfr_data_generation, test_wb_data_generation, \
     test_reg_data_generation

@@ -4,6 +4,7 @@ import gradio as gr
 import torch
 from torch.utils.data import DataLoader
 import sys
+sys.path.append("../../")
 from torchvision import transforms
 from src.Models.cvt import CvTRegression
 from src.Models.one_epoch_run import testingEpoch, testingEpochOne
