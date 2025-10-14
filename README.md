@@ -46,4 +46,4 @@ pip install -r requirements.txt
 
 #### Weights
 The trained checkpoints for the experiments are available on GoogleDrive
-Access it [here](link)
+Access it [here](https://drive.google.com/drive/folders/16w2oXF3nrA5wI-i6CxIxIX73Z7Pf6qWF?usp=drive_link)
