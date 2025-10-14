@@ -1,6 +1,7 @@
 # ViTsGraphicalPerception
 
-![Image](https://github.com/poonam2308/ViTsGraphicalPerception/tree/main/src/Images/graphical_abstract.pdf)
+![Graphical Abstract](src/Images/graphical_abstract.pdf)
+
 **Evaluating graphical perception capabilities of Vision Transformers**  
 Vision Transformers (ViTs) have emerged as a powerful alternative to convolutional
 neural networks (CNNs) in a variety of image-based tasks. While CNNs have pre-
