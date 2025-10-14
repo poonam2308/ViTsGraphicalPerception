@@ -4,7 +4,7 @@ import skimage.draw
 import sys
 
 sys.path.append('../')
-from util import Util
+from src.util import Util
 
 
 class Weber:
