@@ -15,7 +15,7 @@ from src.ClevelandMcGill.figure12 import Figure12
 from src.ClevelandMcGill.figure3 import Figure3
 from src.ClevelandMcGill.figure4 import Figure4
 from src.ClevelandMcGill.weber import Weber
-
+import os
 np.random.seed(0)
 torch.manual_seed(0)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -122,8 +122,6 @@ def data_loader(task_name, experiment_type):
     return test_loader
 
 
-## from this app file i covered noise folder and tiny folder
-# AND NOISE 2 FOLDER TOO and noiseless folder
 def test_model(model, model_name, task_name, exp_type, test_loader):
     model.to(device)
     PATH = "chkpt/chkpts_fromCluster/noiseless/" + model_name.lower() + "3wn_" + exp_type + ".pth"
@@ -135,6 +133,7 @@ def test_model(model, model_name, task_name, exp_type, test_loader):
     json_data = {'Model': model_name, 'Task_name': task_name, 'Experiment_type': exp_type, 'MLAE': m_error}
     # Write JSON file
     file_name = 'results/noiseless/' + model_name + '3wn_' + exp_type + '.json'
+    os.makedirs(os.path.dirname(file_name), exist_ok=True)
     with open(file_name, 'w', ) as outfile:
         json.dump(json_data, outfile)
     return m_error
