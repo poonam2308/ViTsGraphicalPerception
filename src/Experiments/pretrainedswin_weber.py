@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from transformers import SwinForImageClassification
-
+from src.ClevelandMcGill.weber import Weber
 from torchvision import transforms
 from src.Models.one_epoch_run import trainingEpoch_pre, validationEpoch_pre, testingEpochOne_pre
 from src.Datasets.weber_data import WeberData, wb_normalization_data, wb_data_generation
@@ -57,7 +57,7 @@ for i in range(len(DATATYPE_LIST)):
     test_loader = DataLoader(test_dataset, args.batch_size, shuffle=False)
 
     swin_model = SwinForImageClassification.from_pretrained("microsoft/swin-tiny-patch4-window7-224")
-    swin_model.classifier = torch.nn.Linear(swin_model.config.hidden_size, args.num_classes)  # REGRESSION
+    swin_model.classifier = torch.nn.Linear(swin_model.config.hidden_size, 1)  # REGRESSION
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     swin_model.to(device)
     criterion = nn.MSELoss()

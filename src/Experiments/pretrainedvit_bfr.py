@@ -4,6 +4,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from src.Datasets.bar_frame_rectangle_data import bf_data_generation, bf_normalization_data, BarFrameRectData
 from torchvision import transforms
+from src.ClevelandMcGill.figure12 import Figure12
 from src.Models.one_epoch_run import  testingEpoch_pre, validationEpoch_pre, trainingEpoch_pre
 from transformers import ViTForImageClassification
 from src.config_utils import get_args_parser, init_wandb
@@ -59,7 +60,7 @@ for i in range(len(DATATYPE_LIST)):
     model_name = "google/vit-base-patch16-224"
     vit_model = ViTForImageClassification.from_pretrained(model_name)
 
-    vit_model.classifier = torch.nn.Linear(vit_model.config.hidden_size, args.num_classes)  # REGRESSION num_classes =5
+    vit_model.classifier = torch.nn.Linear(vit_model.config.hidden_size, 2)  # REGRESSION num_classes =5
 
     # Move the model to the GPU
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

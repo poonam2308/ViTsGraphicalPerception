@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
+from src.ClevelandMcGill.figure3 import Figure3
 from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
 from src.Datasets.position_angle_data import pa_data_generation, pa_normalization_data, PositionAngleData
 from src.Models.vit import ViTRegression
@@ -65,12 +66,12 @@ for i in range(len(DATATYPE_LIST)):
     training_loss = []
     validation_loss = []
 
-    for epoch in range(args.epoch):
+    for epoch in range(args.epochs):
         train_loss = trainingEpoch(vit_model, train_loader, criterion, optimizer, epoch, device)
         training_loss.append(train_loss)
         val_loss = validationEpoch(vit_model, val_loader, criterion, epoch, device)
         validation_loss.append(val_loss)
-        torch.save(vit_model.state_dict(), 'chkpt/tiny/vit_tiny_patch8' + DATATYPE_LIST[i] + '.pth')
+        torch.save(vit_model.state_dict(), 'chkpt/vit_tiny_patch8' + DATATYPE_LIST[i] + '.pth')
 
     plt.figure()
     plt.plot(training_loss, label='training')
@@ -79,7 +80,7 @@ for i in range(len(DATATYPE_LIST)):
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
     plt.title("training and validation loss")
-    plt.savefig('trainingplots/tiny/vit_tiny_patch8' + DATATYPE_LIST[i] + '.png')
+    plt.savefig('trainingplots/vit_tiny_patch8' + DATATYPE_LIST[i] + '.png')
 
     MLAE = testingEpoch(vit_model, test_loader, device)
     print("MLAE", round(MLAE, 2))

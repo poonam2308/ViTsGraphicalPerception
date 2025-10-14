@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
+from src.ClevelandMcGill.weber import Weber
 from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpochOne
 from src.Models.vit import ViTRegression
 from src.Datasets.weber_data import wb_data_generation, wb_normalization_data, WeberData
@@ -67,12 +68,12 @@ for i in range(len(DATATYPE_LIST)):
     training_loss = []
     validation_loss = []
 
-    for epoch in range(args.epoch):
+    for epoch in range(args.epochs):
         train_loss = trainingEpoch(vit_model, train_loader, criterion, optimizer, epoch, device)
         training_loss.append(train_loss)
         val_loss = validationEpoch(vit_model, val_loader, criterion, epoch, device)
         validation_loss.append(val_loss)
-        torch.save(vit_model.state_dict(), 'chkpt/nl_vitwn/vit3wn_' + DATATYPE_LIST[i] + '.pth')
+        torch.save(vit_model.state_dict(), 'chkpt/vit3wn_' + DATATYPE_LIST[i] + '.pth')
 
     plt.figure()
     plt.plot(training_loss, label='training')
@@ -81,6 +82,6 @@ for i in range(len(DATATYPE_LIST)):
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
     plt.title("training and validation loss")
-    plt.savefig('trainingplots/nl_vitwn/vit3wn_' + DATATYPE_LIST[i] + '.png')
+    plt.savefig('trainingplots/vit3wn_' + DATATYPE_LIST[i] + '.png')
     MLAE = testingEpochOne(vit_model, test_loader, device)
     print("MLAE", round(MLAE, 2))

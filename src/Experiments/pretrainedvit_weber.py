@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader
 from transformers import ViTForImageClassification
 
 from torchvision import transforms
+from src.ClevelandMcGill.weber import Weber
 from src.Models.one_epoch_run import trainingEpoch_pre, validationEpoch_pre, \
     testingEpochOne_pre
 from src.Datasets.weber_data import wb_data_generation, wb_normalization_data, WeberData
@@ -62,7 +63,7 @@ for i in range(len(DATATYPE_LIST)):
     model_name = "google/vit-base-patch16-224"
     vit_model = ViTForImageClassification.from_pretrained(model_name)
 
-    vit_model.classifier = torch.nn.Linear(vit_model.config.hidden_size, args.num_classes)  # REGRESSION num_classes =5
+    vit_model.classifier = torch.nn.Linear(vit_model.config.hidden_size, 1)  # REGRESSION num_classes =5
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     vit_model.to(device)

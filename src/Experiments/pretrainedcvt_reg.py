@@ -4,6 +4,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from transformers import CvtForImageClassification
 from torchvision import transforms
+from src.ClevelandMcGill.figure1 import Figure1
 from src.Models.one_epoch_run import trainingEpochWithGradClip_pre, validationEpoch_pre, testingEpochOne_pre
 from src.Datasets.perceptiondata import data_generation, normalization_data, PerceptionDataset
 import wandb
@@ -61,7 +62,7 @@ for i in range(len(DATATYPE_LIST)):
 
     # Instantiate the model
     cvt_model = CvtForImageClassification.from_pretrained("microsoft/cvt-13")
-    cvt_model.classifier = torch.nn.Linear(cvt_model.config.embed_dim[-1], args.num_classes)  # REGRESSION
+    cvt_model.classifier = torch.nn.Linear(cvt_model.config.embed_dim[-1], 1)  # REGRESSION
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     cvt_model.to(device)
     criterion = nn.MSELoss()

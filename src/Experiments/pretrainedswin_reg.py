@@ -4,6 +4,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
 from transformers import SwinForImageClassification
+from src.ClevelandMcGill.figure1 import Figure1
 from src.Models.one_epoch_run import trainingEpoch_pre, validationEpoch_pre, testingEpochOne_pre
 from src.Datasets.perceptiondata import data_generation, normalization_data, PerceptionDataset
 from src.config_utils import get_args_parser, init_wandb
@@ -61,7 +62,7 @@ for i in range(len(DATATYPE_LIST)):
 
     # Instantiate the model
     swin_model = SwinForImageClassification.from_pretrained("microsoft/swin-tiny-patch4-window7-224")
-    swin_model.classifier = torch.nn.Linear(swin_model.config.hidden_size, args.num_classes)  # REGRESSION
+    swin_model.classifier = torch.nn.Linear(swin_model.config.hidden_size, 1)  # REGRESSION
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     swin_model.to(device)
     criterion = nn.MSELoss()

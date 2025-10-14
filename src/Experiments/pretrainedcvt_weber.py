@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from transformers import CvtForImageClassification
-
+from src.ClevelandMcGill.weber import Weber
 from torchvision import transforms
 from src.Datasets.weber_data import WeberData, wb_normalization_data, wb_data_generation
 from src.Models.one_epoch_run import trainingEpoch_pre, validationEpoch_pre, testingEpochOne_pre
@@ -54,7 +54,7 @@ for i in range(len(DATATYPE_LIST)):
     test_loader = DataLoader(test_dataset, args.batch_size, shuffle=False)
 
     cvt_model = CvtForImageClassification.from_pretrained("microsoft/cvt-13")
-    cvt_model.classifier = torch.nn.Linear(cvt_model.config.embed_dim[-1], args.num_classes)  # REGRESSION
+    cvt_model.classifier = torch.nn.Linear(cvt_model.config.embed_dim[-1], 1)  # REGRESSION
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     cvt_model.to(device)
     criterion = nn.MSELoss()
@@ -65,7 +65,7 @@ for i in range(len(DATATYPE_LIST)):
     training_loss = []
     validation_loss = []
 
-    for epoch in range(100):
+    for epoch in range(args.epochs):
         train_loss = trainingEpoch_pre(cvt_model, train_loader, criterion, optimizer, epoch, device)
         training_loss.append(train_loss)
         val_loss = validationEpoch_pre(cvt_model, val_loader, criterion, epoch, device)

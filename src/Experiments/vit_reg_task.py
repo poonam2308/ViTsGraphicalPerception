@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
+from src.ClevelandMcGill.figure1 import Figure1
 from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpochTask
 from src.Datasets.perceptiondata import data_generation, normalization_data, PerceptionDataset
 from src.Models.vit import ViTRegression
@@ -34,9 +35,9 @@ for i, task in enumerate(DATATYPE_LIST):
         for f in range(flag_count):
             FLAGS[f] = True
 
-        model_path = f'chkpt/varied/vit_reg_{task}_flags{flag_count}.pth'
-        plot_path = f'trainingplots/varied/vit_reg_{task}_flags{flag_count}.png'
-        stats_path = f'stats/varied/vit_reg_{task}_flags{flag_count}.pkl'
+        model_path = f'chkpt/vit_reg_{task}_flags{flag_count}.pth'
+        plot_path = f'trainingplots/vit_reg_{task}_flags{flag_count}.png'
+        stats_path = f'stats/vit_reg_{task}_flags{flag_count}.pkl'
 
         os.makedirs(os.path.dirname(model_path), exist_ok=True)
         os.makedirs(os.path.dirname(plot_path), exist_ok=True)
@@ -105,7 +106,7 @@ for i, task in enumerate(DATATYPE_LIST):
         training_loss = []
         validation_loss = []
 
-        for epoch in range(args.epoch):
+        for epoch in range(args.epochs):
             train_loss = trainingEpoch(vit_model, train_loader, criterion, optimizer, epoch, device)
             training_loss.append(train_loss)
             val_loss = validationEpoch(vit_model, val_loader, criterion, epoch, device)

@@ -35,8 +35,22 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 echo "Installing dependencies from requirements.txt..."
 pip install -r requirements.txt
 
+# 7 (optional): Default to offline mode if not logged in
+if python - <<'PY'
+import os, pathlib
+# consider "logged in" if ~/.netrc contains 'api.wandb.ai' or WANDB_API_KEY is set
+netrc = pathlib.Path.home()/".netrc"
+data = netrc.read_text() if netrc.exists() else ""
+exit(0 if ("api.wandb.ai" in data or os.environ.get("WANDB_API_KEY")) else 1)
+PY
+then
+  echo "W&B online mode available."
+else
+  export WANDB_MODE=offline
+  echo "W&B API key not found. Setting WANDB_MODE=offline."
+fi
 
-# 7. Check CUDA availability
+# 8. Check CUDA availability
 echo "Verifying CUDA setup..."
 python - <<'EOF'
 import torch

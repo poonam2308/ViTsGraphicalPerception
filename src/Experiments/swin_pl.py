@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
+from src.ClevelandMcGill.figure4 import Figure4
 from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
 from src.Datasets.position_length_data import pl_data_generation, pl_normalization_data, PositionLengthData
 from src.Models.swin import SwinRegression
@@ -78,12 +79,12 @@ for i in range(len(DATATYPE_LIST)):
     training_loss = []
     validation_loss = []
 
-    for epoch in range(args.epoch):
+    for epoch in range(args.epochs):
         train_loss = trainingEpoch(swin_model, train_loader, criterion, optimizer, epoch, device)
         training_loss.append(train_loss)
         val_loss = validationEpoch(swin_model, val_loader, criterion, epoch, device)
         validation_loss.append(val_loss)
-        torch.save(swin_model.state_dict(), 'chkpt/largedata_r/swin1_' + DATATYPE_LIST[i] + '.pth')
+        torch.save(swin_model.state_dict(), 'chkpt/swin1_' + DATATYPE_LIST[i] + '.pth')
 
     plt.figure()
     plt.plot(training_loss, label='training')
@@ -92,7 +93,7 @@ for i in range(len(DATATYPE_LIST)):
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
     plt.title("training and validation loss")
-    plt.savefig('trainingplots/largedata_r/swin1_'+DATATYPE_LIST[i] + '.png')
+    plt.savefig('trainingplots/swin1_'+DATATYPE_LIST[i] + '.png')
 
     MLAE = testingEpoch(swin_model, test_loader, device)
     print("MLAE", round(MLAE, 2))
