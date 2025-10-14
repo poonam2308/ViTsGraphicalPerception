@@ -1,6 +1,6 @@
 # ViTsGraphicalPerception
 
-![Graphical Abstract](src/Images/graphical_abstract.pdf)
+[Graphical Abstract](src/Images/graphical_abstract.pdf)
 
 **Evaluating graphical perception capabilities of Vision Transformers**  
 Vision Transformers (ViTs) have emerged as a powerful alternative to convolutional
