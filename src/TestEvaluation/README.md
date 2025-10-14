@@ -1,7 +1,9 @@
 # Evaluation 
 
-- First download the chkpts and save them in the specified folders 
-- then each evaluation module (app) can be run.
-- the app will run a gradio module which gives the possibility to select the model and task 
-- Once you select, it will test the data and produce MLAE result.
-- Statisical test can be verified from jupyternotebook [Statistical_Test](Statistical_Test.ipynb)
+- Download the model checkpoints and place them in the specified folders ('src/Test/Evaluation/chkpt') 
+- Launch the app (Gradio UI)
+  - This starts a Gradio interface where you can select a model and a task.
+  - After you click Run, the app evaluates the selected configuration and reports the MLAE metric (the paper’s evaluation metric).
+  - The app writes results to a 'results/' folder.
+- Each additional script in the repository corresponds to an evaluation module for a specific ablation study.
+- Statisical test can be verified from notebook [Statistical_Test](Statistical_Test.ipynb)
