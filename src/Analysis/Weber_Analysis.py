@@ -89,28 +89,22 @@ for z, experiment in enumerate(titles):
         ax.spines['right'].set_visible(False)
         ax.spines['bottom'].set_visible(False)
         ax.spines['left'].set_visible(False)
-        #         if row != 0:
+
         ax.get_yaxis().set_ticks([])
 
-        #ax.get_xaxis().set_ticks(np.arange(2, 11, 8))  # mark the tange
-        #ax.get_xaxis().set_ticks(np.arange(5, 5.1), minor=True)  # mark the center
         ax.get_xaxis().set_ticks(np.concatenate((np.arange(0, 11, 10), np.arange(5, 5.1))))
         ax.tick_params(axis=u'both', which=u'both', length=0)
 
-        # remove tick marks
         if z !=2:
             from matplotlib.ticker import NullFormatter
 
             ax.xaxis.set_major_formatter(NullFormatter())
             ax.xaxis.set_ticks_position('none')
 
-        # grid lines for X
         plt.grid(True, color='gray', which='major', axis='x', alpha=1)
         plt.grid(True, color='gray', which='minor', axis='x', alpha=0.2)
         c_color = 'C' + str(i - 2)
         errorbars = plt.errorbar(means, y_pos, xerr=confidence, fmt='o', color=c_color, label=c)
-    # if z == 2:
-    #     plt.legend(loc='upper left', fontsize=11)
 
     handles, labels = ax.get_legend_handles_labels()
 fig.legend(

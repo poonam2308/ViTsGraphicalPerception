@@ -80,10 +80,7 @@ def mean_confidence_interval(data, confidence=0.95):
 
 
 fig = plt.figure(figsize=(6, 15), facecolor='white')
-gs = gridspec.GridSpec(len(experiments), 2, width_ratios=[.3, 1], hspace=.3)  # , wspace=.5)
-# experiments = [experiments[1]]
-
-# print experiments
+gs = gridspec.GridSpec(len(experiments), 2, width_ratios=[.3, 1], hspace=.3)
 
 classifiers3 = ['Image', 'Human'] + classifiers + ['Dummy']
 all_results_fresh = dict(all_results)
@@ -154,8 +151,6 @@ for z, experiment in enumerate(experiments):
         ax.spines['left'].set_visible(False)
         ax.get_yaxis().set_ticks([])
 
-        #ax.get_xaxis().set_ticks(np.arange(-1, 7, 7))  # mark the tange
-        #ax.get_xaxis().set_ticks(np.arange(0, 0.1), minor=True)  # mark the center
         ax.get_xaxis().set_ticks(np.concatenate((np.arange(-1, 8, 8), np.arange(3, 3.1))))
         ax.tick_params(axis=u'both', which=u'both', length=0)
 
@@ -173,8 +168,6 @@ for z, experiment in enumerate(experiments):
         c_color = 'C' + str(i - 2)
         errorbars = plt.errorbar(means, y_pos, xerr=confidence, fmt='o', color=c_color, label=c)
 
-    # if z == 7:
-    #     plt.legend(loc='right', fontsize=8)
     handles, labels = ax.get_legend_handles_labels()
 fig.legend(
     handles, labels,

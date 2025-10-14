@@ -5,7 +5,6 @@ from matplotlib import gridspec
 
 from src.ClevelandMcGill.figure4 import Figure4
 
-# if there is our of bounds, try running again
 sys.path.append('../')
 
 classifiers = ['CvT', 'Swin', 'vViT']
@@ -16,10 +15,8 @@ all_data = [[[4.74, 4.79, 4.83], [4.72, 4.71, 4.69], [4.81, 4.74, 4.75], [4.72, 
             [[4.77, 5.10, 4.99], [4.74, 4.73, 4.81], [5.36, 5.32, 5.25], [4.86, 4.96, 4.75]],
             [[4.81, 5.9, 4.77], [4.72, 4.72, 4.73], [4.76, 4.8, 4.89], [4.71, 4.73, 4.73]],
             [[5.58, 5.58, 5.40], [4.71, 4.71, 4.73], [5.14, 5.04, 5.11], [5.18, 5.00, 5.12]],
-            # new
             [[5.37, 5.37, 5.38], [4.74, 4.74, 4.75], [5.23, 5.06, 5.11], [5.19, 5.01, 5.10]]]
 
-## images
 images = []
 for type_ in range(1, 6):
     data, labels = Figure4.generate_datapoint()
@@ -29,9 +26,9 @@ for type_ in range(1, 6):
     image += np.random.uniform(0, 0.05, (100, 100))
     images.append(image)
 fig = plt.figure(figsize=(5, 9), facecolor='white')
-gs = gridspec.GridSpec(5, 2, width_ratios=[.1, .3], hspace=.3)  # , wspace=.5)
+gs = gridspec.GridSpec(5, 2, width_ratios=[.1, .3], hspace=.3)
 classifiers3 = ['Image', 'Human'] + classifiers + ['Dummy']
-j = 0  # grid index (running)
+j = 0
 rows = 5
 for row in range(rows):
 
@@ -65,7 +62,7 @@ for row in range(rows):
         if i == 1:
             fig = plt.subplot(gs[j])
             j += 1
-            # this is human
+
             means = human_values[row][0]
             confidence = human_values[row][1]
 
@@ -99,14 +96,14 @@ for row in range(rows):
         ax.get_xaxis().set_ticks(np.concatenate((np.arange(0, 7, 6), np.arange(3, 3.1))))
         ax.tick_params(axis=u'both', which=u'both', length=0)
 
-        # remove tick marks
+
         if row != 4:
             from matplotlib.ticker import NullFormatter
 
             ax.xaxis.set_major_formatter(NullFormatter())
             ax.xaxis.set_ticks_position('none')
 
-        # grid lines for X
+
         plt.grid(True, color='gray', which='major', axis='x', alpha=1)
         c_color = 'C' + str(i - 2)
         errorbars = plt.errorbar(means, y_pos, xerr=confidence, fmt='o', color=c_color, label=c)

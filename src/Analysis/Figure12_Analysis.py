@@ -17,9 +17,6 @@ pie_data = [None] * 3
 human_values = [(3.33, 0.83), (3.93, 0.52),]
 human_values.append((np.mean([v[0] for v in human_values]), np.mean([v[1] for v in human_values])))
 
-
-# this analysis is only for three vision transformers: cvt, swin and vit (csv)
-
 classifiers = ['CvT', 'Swin', 'vViT']
 all_data = [[[4.77, 4.73, 4.79], [4.74, 4.77, 4.75], [5.49, 5.4, 5.49], [5.49, 4.94, 4.78]], # rect  [[cvt],[swin],[vit]]
             [[4.79, 4.71, 4.71], [4.76, 4.74, 4.76], [5.34, 5.23, 5.21], [5.22, 5.50, 5.25]]] # bar
@@ -38,7 +35,7 @@ images = [rect_image, bar_image]
 fig = plt.figure(figsize=(7, 5), facecolor='white')
 gs = gridspec.GridSpec(len(experiments), 2, width_ratios=[.1, .3], hspace=.3)
 
-j = 0  # grid index (running)
+j = 0
 classifiers3 = ['Image', 'Human'] + classifiers + ['Dummy']
 for z, experiment in enumerate(experiments):
 
@@ -98,14 +95,14 @@ for z, experiment in enumerate(experiments):
         ax.get_xaxis().set_ticks(np.concatenate((np.arange(0, 7, 6), np.arange(3, 3.1))))
         ax.tick_params(axis=u'both', which=u'both', length=0)
 
-        # remove tick marks
+
         if z !=1:
             from matplotlib.ticker import NullFormatter
 
             ax.xaxis.set_major_formatter(NullFormatter())
             ax.xaxis.set_ticks_position('none')
 
-        # grid lines for X
+
         plt.grid(True, color='gray', which='major', axis='x', alpha=1)
         plt.grid(True, color='gray', which='minor', axis='x', alpha=0.2)
         c_color = 'C' + str(i - 2)

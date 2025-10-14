@@ -45,7 +45,7 @@ images = [bar_image, pie_image, pie_image_aa]
 fig = plt.figure(figsize=(7, 5), facecolor='white')
 gs = gridspec.GridSpec(len(experiments), 2, width_ratios=[.1, .3], hspace=.3)
 
-j = 0  # grid index (running)
+j = 0
 classifiers3 = ['Image', 'Human'] + classifiers + ['Dummy']
 for z, experiment in enumerate(experiments):
 
@@ -107,25 +107,20 @@ for z, experiment in enumerate(experiments):
 
         ax.get_yaxis().set_ticks([])
 
-        # ax.get_xaxis().set_ticks(np.arange(0, 7, 6))  # mark the tange
-        # ax.get_xaxis().set_ticks(np.arange(3, 3.1), minor=True)  # mark the center
         ax.get_xaxis().set_ticks(np.concatenate((np.arange(0, 7, 6), np.arange(3, 3.1))))
         ax.tick_params(axis=u'both', which=u'both', length=0)
-
-        # remove tick marks
         if z != 2:
             from matplotlib.ticker import NullFormatter
 
             ax.xaxis.set_major_formatter(NullFormatter())
             ax.xaxis.set_ticks_position('none')
 
-        # grid lines for X
+
         plt.grid(True, color='gray', which='major', axis='x', alpha=1)
         plt.grid(True, color='gray', which='minor', axis='x', alpha=0.2)
         c_color = 'C' + str(i - 2)
         errorbars = plt.errorbar(means, y_pos, xerr=confidence,  fmt='o', color=c_color, label=c)
-    # if z == 2:
-    #     plt.legend(loc='upper left', fontsize=11) #12
+
     handles, labels = ax.get_legend_handles_labels()
 fig.legend(
     handles, labels,
