@@ -38,11 +38,11 @@ pip install -r requirements.txt
 ```
 
 #### How it works 
-- Stimulus Generation (Data): 'src/ClevelandMcGill' modules to build task specific images 
-- Network: 'src/Models' modules to define the three types (CvT, Swin, vViT) network architecture used in the paper
-- Training: 'src/Experiments' modules to perform training on CvT, Swin and vVit on generated data. 
-- Evaluation: 'src/TestEvaluation' modules to evaluate the trained checkpoints (weights) on the test dataset. 
-- Analysis: 'src/Analysis' modules to compare CvT, Swin, and vViT to human performance on the same synthetic stimuli.
+- Stimulus Generation (Data): [src/ClevelandMcGill](src/ClevelandMcGill) modules to build task specific images 
+- Network: [src/Models](src/Models) modules to define the three types (CvT, Swin, vViT) network architecture used in the paper
+- Training: [src/Experiments](src/Experiments) modules to perform training on CvT, Swin and vVit on generated data. 
+- Evaluation: [src/TestEvaluation](src/TestEvaluation) modules to evaluate the trained checkpoints (weights) on the test dataset. 
+- Analysis: [src/Analysis](src/Analysis) modules to compare CvT, Swin, and vViT to human performance on the same synthetic stimuli.
 
 #### Weights
 The trained checkpoints for the experiments are available on GoogleDrive
