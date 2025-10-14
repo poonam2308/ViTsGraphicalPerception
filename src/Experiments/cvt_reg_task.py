@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
+from src.ClevelandMcGill.figure1 import Figure1
 from src.Models.one_epoch_run import validationEpoch, trainingEpochWithGradClip, testingEpochTask
 from src.Datasets.perceptiondata import data_generation, normalization_data, PerceptionDataset
 from src.Models.cvt import CvTRegression
@@ -29,16 +30,16 @@ task_flag_limits = {
 
 for i, task in enumerate(DATATYPE_LIST):
     DATATYPE = eval(FIGURE1 + task)
-    max_flags = task_flag_limits.get(task, 3)  # Default to 0-2 if not listed
+    max_flags = task_flag_limits.get(task, 3)
 
     for flag_count in range(max_flags):
         FLAGS = [False] * 10
         for f in range(flag_count):
             FLAGS[f] = True
 
-        model_path = f'chkpt/varied/cvt_reg_{task}_flags{flag_count}.pth'
-        plot_path = f'trainingplots/varied/cvt_reg_{task}_flags{flag_count}.png'
-        stats_path = f'stats/varied/cvt_reg_{task}_flags{flag_count}.pkl'
+        model_path = f'chkpt/cvt_reg_{task}_flags{flag_count}.pth'
+        plot_path = f'trainingplots/cvt_reg_{task}_flags{flag_count}.png'
+        stats_path = f'stats//cvt_reg_{task}_flags{flag_count}.pkl'
 
         os.makedirs(os.path.dirname(model_path), exist_ok=True)
         os.makedirs(os.path.dirname(plot_path), exist_ok=True)
@@ -84,7 +85,7 @@ for i, task in enumerate(DATATYPE_LIST):
         training_loss = []
         validation_loss = []
 
-        for epoch in range(args.epoch):
+        for epoch in range(args.epochs):
             clip_gradient_norm = 1.0
             train_loss = trainingEpochWithGradClip(
                 cvt_model, train_loader, criterion, optimizer, epoch, device, clip_gradient_norm

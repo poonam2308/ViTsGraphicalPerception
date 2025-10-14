@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
-
+from src.ClevelandMcGill.figure4 import Figure4
 from src.Models.cvt import CvTRegression
 from src.Models.one_epoch_run import trainingEpoch, validationEpoch, testingEpoch
 from src.Datasets.position_length_data import pl_normalization_data, pl_data_generation, PositionLengthData
@@ -65,12 +65,12 @@ for i in range(len(DATATYPE_LIST)):
     training_loss = []
     validation_loss = []
 
-    for epoch in range(args.epoch):
+    for epoch in range(args.epochs):
         train_loss = trainingEpoch(cvt_model, train_loader, criterion, optimizer, epoch, device)
         training_loss.append(train_loss)
         val_loss = validationEpoch(cvt_model, val_loader, criterion, epoch, device)
         validation_loss.append(val_loss)
-        torch.save(cvt_model.state_dict(), 'chkpt/noise/cvt3n3_' + DATATYPE_LIST[i] + '.pth')
+        torch.save(cvt_model.state_dict(), 'chkpt/cvt3n3_' + DATATYPE_LIST[i] + '.pth')
 
     plt.figure()
     plt.plot(training_loss, label='training')
@@ -79,7 +79,7 @@ for i in range(len(DATATYPE_LIST)):
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
     plt.title("training and validation loss")
-    plt.savefig('trainingplots/noise/cvt3n3_' + DATATYPE_LIST[i] + '.png')
+    plt.savefig('trainingplots/cvt3n3_' + DATATYPE_LIST[i] + '.png')
 
     MLAE = testingEpoch(cvt_model, test_loader, device)
     print("MLAE", round(MLAE, 2))

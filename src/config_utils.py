@@ -14,7 +14,7 @@ def get_args_parser():
                         default=True,
                         help="Add noise to the data")
 
-    parser.add_argument("--epochs", default=50, type=int, help="training epochs")
+    parser.add_argument("--epochs", default=2, type=int, help="training epochs")
 
     # Optimizer parameter
     parser.add_argument("--weight_decay",
@@ -39,9 +39,9 @@ def get_args_parser():
                         help="learning rate (lr)")
 
     #data gen values
-    parser.add_argument("--train_target", default=60000, type=int, help="training data")
-    parser.add_argument("--val_target", default=20000, type=int, help="validation data")
-    parser.add_argument("--test_target", default=20000, type=int, help="testing data")
+    parser.add_argument("--train_target", default=100, type=int, help="training data")
+    parser.add_argument("--val_target", default=20, type=int, help="validation data")
+    parser.add_argument("--test_target", default=20, type=int, help="testing data")
 
     #vit model parameters
     parser.add_argument("--vit_input_size", default=224, type=int, help="images input size")
