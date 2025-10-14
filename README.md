@@ -26,15 +26,14 @@ The src directory contains the code necessary to produce the data, train the mod
 git clone git@github.com:poonam2308/ViTsGraphicalPerception.git
 cd ViTsGraphicalPerception
 bash setup_venv.sh
-source .venv/bin/activate
-pip install -r requriements.txt
+source venv/bin/activate
 
 ```
 #### Manual set up alternative
 ```commandline
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirments.txt
+pip install -r requirements.txt
 
 ```
 

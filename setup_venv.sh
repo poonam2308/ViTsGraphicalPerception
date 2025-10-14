@@ -23,12 +23,13 @@ source venv/bin/activate
 echo "Upgrading pip..."
 pip install --upgrade pip
 
-# 5. Install PyTorch (CUDA 12.1)
-echo "Installing PyTorch with CUDA 12.1..."
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+# 5. Install PyTorch (CUDA 12.4)
+echo "Installing PyTorch with CUDA 12.4..."
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
-# another: CUDA 11.8
-#pip install torch==2.3.0+cu118 torchvision --extra-index-url https://download.pytorch.org/whl/cu118
+# another way : CUDA 12.4
+#pip install torch==2.6.0+cu124 torchvision==0.21.0+cu124 torchaudio==2.6.0+cu124 \
+ #  --index-url https://download.pytorch.org/whl/cu124
 
 # 6. Install dependencies
 echo "Installing dependencies from requirements.txt..."
