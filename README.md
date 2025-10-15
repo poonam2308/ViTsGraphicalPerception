@@ -82,7 +82,7 @@ All experiment scripts accept the following flags:
 
 
 ###  Evaluation and Analysis 
-- Generate the analysis figures, Run the analysis scripts directly
+**Generate the analysis figures, Run the analysis scripts directly**
 ```bash
 python src/Analysis/Figure1Analysis.py
 python src/Analysis/Figure12Analysis.py
@@ -102,7 +102,7 @@ TestEvaluation/chkpt/
 Main_Evaluation.ipynb
 ```
 
-- All evaluation results are saved as CSV files under the  results/ subfolders.
+All evaluation results are saved as CSV files under the  results/ subfolders.
 
 
 **Ablation study (all models via one notebook)**
@@ -113,4 +113,4 @@ Main_Evaluation.ipynb
 Ablation_Evaluation.ipynb
 ```
 
--Checkpoints: total size is ~96 GB. Please email the author to request the specific ablation checkpoints you need and they will be shared individually
+Checkpoints: total size is ~96 GB. Please email the author to request the specific ablation checkpoints you need and they will be shared individually
