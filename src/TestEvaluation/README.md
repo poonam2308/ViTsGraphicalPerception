@@ -7,4 +7,3 @@
   - The app writes results to a 'results/' folder.
 - Each additional script in the repository corresponds to an evaluation module for a specific ablation study.
 - Statisical test can be verified from notebook [Statistical_Test](Statistical_Test.ipynb)
-- Checkpoints: total size is ~96 GB. Please email the author to request the specific ablation checkpoints you need and they will be shared individually
