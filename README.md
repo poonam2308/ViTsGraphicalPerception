@@ -86,7 +86,7 @@ Reproduce the following via single scripts
 
 **Analysis figures Run the analysis scripts directly**
 
-1. Naviagte to the direcory [src/Analysis](src/Analysis)
+1. Navigate to the directory [src/Analysis](src/Analysis)
 2. Open and run:
 
 ```bash
@@ -94,7 +94,7 @@ Analysis.ipynb
 ```
 
 **Baseline evaluation (all models via one single script notebook)**
-1. Naviagte to the directory [src/TestEvaluation](src/TestEvaluation) 
+1. Navigate to the directory [src/TestEvaluation](src/TestEvaluation) 
   Download the pretrained checkpoints and place them in:
 
 ```bash
@@ -110,8 +110,13 @@ All evaluation results are saved as CSV files under the  results/ subfolders.
 
 
 **Ablation study (all models via one single script notebook)**
+1. Navigate to the directory [src/TestEvaluation](src/TestEvaluation) 
+  Download the pretrained checkpoints and place them in:
+```bash
+TestEvaluation/chkpt/
+```
 
-1. Open and run:
+2. Open and run:
 
 ```bash
 Ablation_Evaluation.ipynb
