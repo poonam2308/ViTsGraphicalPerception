@@ -90,7 +90,7 @@ python src/Analysis/Figure3Analysis.py
 python src/Analysis/Figure4Analysis.py
 python src/Analysis/WeberAnalysis.py
 ```
-**Baseline evaluation (all models via one notebook)**
+**Baseline evaluation (all models via one single script notebook)**
 1. Download the pretrained checkpoints and place them in:
 
 ```bash
@@ -105,7 +105,7 @@ Main_Evaluation.ipynb
 All evaluation results are saved as CSV files under the  results/ subfolders.
 
 
-**Ablation study (all models via one notebook)**
+**Ablation study (all models via one single script notebook)**
 
 1. Open and run:
 

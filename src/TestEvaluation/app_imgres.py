@@ -134,6 +134,7 @@ def test_model(model, model_name, task_name, exp_type, test_loader):
     json_data = {'Model': model_name, 'Task_name': task_name, 'Experiment_type': exp_type, 'MLAE': m_error}
     # Write JSON file
     file_name = 'results/img_res/' + model_name + 'img_res_' + exp_type + '.json'
+    os.makedirs(os.path.dirname(file_name), exist_ok=True)
     with open(file_name, 'w', ) as outfile:
         json.dump(json_data, outfile)
     return m_error
