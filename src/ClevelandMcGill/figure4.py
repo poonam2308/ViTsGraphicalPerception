@@ -11,7 +11,7 @@ class Figure4:
     SIZE = (100, 100)
 
     @staticmethod
-    def generate_datapoint():
+    def generate_datapoint1():
         '''
         '''
 
@@ -30,6 +30,30 @@ class Figure4:
 
         label = ratio
 
+        return data, label
+
+    @staticmethod
+    def generate_datapoint():
+        """
+        Generate two distinct values a, b from the Cleveland–McGill pair set,
+        with an extra guard so that a + b <= 81. This ensures
+        current_max = 93 - a - b >= 12 for data_to_type5.
+        """
+        pairs = [10. * 10. ** ((i - 1.) / 12.) for i in range(1, 11)]
+        while True:
+            value_A = np.round(np.random.choice(pairs))
+            value_B = value_A
+            while value_B == value_A:
+                value_B = np.round(np.random.choice(pairs))
+
+            # FIX: enforce enough headroom for data_to_type5
+            # (i.e., 93 - a - b >= 12  ->  a + b <= 81)
+            if (value_A + value_B) <= 81:
+                break  # valid pair
+
+        data = [value_A, value_B]
+        ratio = (np.round(min(value_A, value_B)) / np.round(max(value_A, value_B)))
+        label = ratio
         return data, label
 
     @staticmethod
@@ -401,7 +425,7 @@ class Figure4:
         return barchart
 
     @staticmethod
-    def data_to_type5(data):
+    def data_to_type51(data):
         '''
         '''
         barchart = np.zeros((100, 100), dtype=bool)
@@ -469,6 +493,74 @@ class Figure4:
 
         current = 0
         for i, d in enumerate(all_values[5:]):
+            rr, cc = skimage.draw.line(99 - (int(d) + current), 60, 99 - (int(d) + current), 90)
+            barchart[rr, cc] = 1
+            current += int(d)
+
+        return barchart
+
+    @staticmethod
+    def data_to_type5(data):
+        """
+        Stacked bars with two fixed segments (data[0], data[1]) and three random ones,
+        then a separate 5-segment stack. Requires enough slack (a+b <= 81).
+        """
+        barchart = np.zeros((100, 100), dtype=bool)
+        all_values = [0] * 10
+
+        current_max = 93 - int(data[0]) - int(data[1])
+
+        # FIX: stronger guard to ensure randint(high) >= 4
+        if current_max < 12:
+            raise Exception('Out of bounds')
+
+        # FIX: randint upper bounds must be integer and > 3
+        high_top = int(np.floor(current_max / 3.))
+        if high_top <= 3:
+            raise Exception('Out of bounds')
+
+        all_values[0] = np.random.randint(3, high_top)
+        all_values[1] = np.random.randint(3, high_top)
+        all_values[2] = np.random.randint(3, high_top)
+
+        all_values[3] = int(data[0])
+        all_values[4] = int(data[1])
+
+        current_max = int(np.sum(all_values[0:5]))
+
+        # draw left, right of the left stacked barchart
+        rr, cc = skimage.draw.line(99, 10, 99 - int(current_max), 10)
+        barchart[rr, cc] = 1
+        rr, cc = skimage.draw.line(99, 40, 99 - int(current_max), 40)
+        barchart[rr, cc] = 1
+
+        current = 0
+        for i, d in enumerate(all_values[:5]):
+            rr, cc = skimage.draw.line(99 - (int(d) + current), 10, 99 - (int(d) + current), 40)
+            barchart[rr, cc] = 1
+            current += int(d)
+            if i in (3, 4):
+                barchart[99 - current + (int(d) // 2):99 - current + (int(d) // 2) + 1, 25:26] = 1
+
+        # Second stack (unchanged logic, but ensure integer high)
+        current_max = 93
+        high_right = int(np.floor(current_max / 5.))
+        high_right = max(9, high_right)  # keep original min=8 logic safely above low
+        all_values[5] = np.random.randint(8, high_right)
+        all_values[6] = np.random.randint(8, high_right)
+        all_values[7] = np.random.randint(8, high_right)
+        all_values[8] = np.random.randint(8, high_right)
+        all_values[9] = np.random.randint(8, high_right)
+
+        current_max = int(np.sum(all_values[5:]))
+
+        rr, cc = skimage.draw.line(99, 60, 99 - int(current_max), 60)
+        barchart[rr, cc] = 1
+        rr, cc = skimage.draw.line(99, 90, 99 - int(current_max), 90)
+        barchart[rr, cc] = 1
+
+        current = 0
+        for d in all_values[5:]:
             rr, cc = skimage.draw.line(99 - (int(d) + current), 60, 99 - (int(d) + current), 90)
             barchart[rr, cc] = 1
             current += int(d)
