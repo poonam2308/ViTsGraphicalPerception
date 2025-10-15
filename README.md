@@ -81,17 +81,21 @@ All experiment scripts accept the following flags:
 ```
 
 
-###  Evaluation and Analysis 
-**Generate the analysis figures, Run the analysis scripts directly**
+###  Evaluation and Analysis
+Reproduce the following via single scripts
+
+**Analysis figures Run the analysis scripts directly**
+
+1. Naviagte to the direcory [src/Analysis](src/Analysis)
+2. Open and run:
+
 ```bash
-python src/Analysis/Figure1Analysis.py
-python src/Analysis/Figure12Analysis.py
-python src/Analysis/Figure3Analysis.py
-python src/Analysis/Figure4Analysis.py
-python src/Analysis/WeberAnalysis.py
+Analysis.ipynb
 ```
+
 **Baseline evaluation (all models via one single script notebook)**
-1. Download the pretrained checkpoints and place them in:
+1. Naviagte to the directory [src/TestEvaluation](src/TestEvaluation) 
+  Download the pretrained checkpoints and place them in:
 
 ```bash
 TestEvaluation/chkpt/

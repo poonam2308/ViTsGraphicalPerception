@@ -63,7 +63,7 @@ for z, experiment in enumerate(experiments):
             ax.xaxis.set_ticks_position('none')
             ax.yaxis.set_major_formatter(NullFormatter())
             ax.yaxis.set_ticks_position('none')
-            plt.tight_layout()
+            # plt.tight_layout()
 
             ax.set_xticklabels('')
             ax.set_yticklabels('')
