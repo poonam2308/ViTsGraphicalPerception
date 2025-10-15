@@ -1,5 +1,5 @@
 import json
-
+import os
 import gradio as gr
 import torch
 from torch.utils.data import DataLoader
@@ -16,7 +16,7 @@ from src.ClevelandMcGill.figure12 import Figure12
 from src.ClevelandMcGill.figure3 import Figure3
 from src.ClevelandMcGill.figure4 import Figure4
 from src.ClevelandMcGill.weber import Weber
-import os
+
 np.random.seed(0)
 torch.manual_seed(0)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -123,9 +123,10 @@ def data_loader(task_name, experiment_type):
     return test_loader
 
 
+## from this app file i covered noise folder and tiny folder
 def test_model(model, model_name, task_name, exp_type, test_loader):
     model.to(device)
-    PATH = "chkpt/chkpts_fromCluster/noiseless/" + model_name.lower() + "3wn_" + exp_type + ".pth"
+    PATH = "chkpt/chkpts_fromCluster/tiny/" + model_name.lower() + "_tiny_patch8" + exp_type + ".pth"
     model.load_state_dict(torch.load(PATH))
     if task_name == "Position-Length" or task_name == "Position-Angle" or "Bar and Framed Rectangle":
         m_error = testingEpoch(model, test_loader, device)
@@ -133,7 +134,7 @@ def test_model(model, model_name, task_name, exp_type, test_loader):
         m_error = testingEpochOne(model, test_loader, device)
     json_data = {'Model': model_name, 'Task_name': task_name, 'Experiment_type': exp_type, 'MLAE': m_error}
     # Write JSON file
-    file_name = 'results/noiseless/' + model_name + '3wn_' + exp_type + '.json'
+    file_name = 'results/tiny/' + model_name + '_tiny_patch8' + exp_type + '.json'
     os.makedirs(os.path.dirname(file_name), exist_ok=True)
     with open(file_name, 'w', ) as outfile:
         json.dump(json_data, outfile)
@@ -151,7 +152,7 @@ def testing_model(model_name, task_name, exp_type):
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         elif model_name == "VIT":
-            model = ViTRegression(num_classes=SINGLE_OUTPUT, channels=3)
+            model = ViTRegression(num_classes=SINGLE_OUTPUT, patch_size=(8, 8), dim=192, depth=12, heads=3, mlp_dim=768, channels=3)
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         else:
@@ -164,7 +165,7 @@ def testing_model(model_name, task_name, exp_type):
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         elif model_name == "VIT":
-            model = ViTRegression(num_classes=FIVE_OUTPUTS,  channels=3)
+            model = ViTRegression(num_classes=FIVE_OUTPUTS, patch_size=(8, 8), dim=192, depth=12, heads=3, mlp_dim=768, channels=3)
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         else:
@@ -177,7 +178,7 @@ def testing_model(model_name, task_name, exp_type):
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         elif model_name == "VIT":
-            model = ViTRegression(num_classes=FIVE_OUTPUTS,  channels=3)
+            model = ViTRegression(num_classes=FIVE_OUTPUTS, patch_size=(8, 8), dim=192, depth=12, heads=3, mlp_dim=768, channels=3)
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         else:
@@ -190,7 +191,7 @@ def testing_model(model_name, task_name, exp_type):
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         elif model_name == "VIT":
-            model = ViTRegression(num_classes=TWO_OUTPUTS,  channels=3)
+            model = ViTRegression(num_classes=TWO_OUTPUTS, patch_size=(8, 8), dim=192, depth=12, heads=3, mlp_dim=768, channels=3)
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         else:
@@ -203,7 +204,7 @@ def testing_model(model_name, task_name, exp_type):
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         elif model_name == "VIT":
-            model = ViTRegression(num_classes=SINGLE_OUTPUT,  channels=3)
+            model = ViTRegression(num_classes=SINGLE_OUTPUT, patch_size=(8, 8), dim=192, depth=12, heads=3, mlp_dim=768, channels=3)
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         else:
@@ -212,7 +213,7 @@ def testing_model(model_name, task_name, exp_type):
             return MLAE
 
 
-MODELS = ["CVT", "SWIN", "VIT"]
+MODELS = ["VIT"]
 
 
 def rs_change(rs):

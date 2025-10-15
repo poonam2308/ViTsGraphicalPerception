@@ -21,7 +21,7 @@ np.random.seed(0)
 torch.manual_seed(0)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-from src.Datasets.testdataset import TestDataset, test_normalization_data, \
+from src.Datasets.testdataset_imgres import TestDataset, test_normalization_data, \
     test_pl_data_generation, test_pa_data_generation, test_bfr_data_generation, test_wb_data_generation, \
     test_reg_data_generation
 
@@ -125,7 +125,7 @@ def data_loader(task_name, experiment_type):
 
 def test_model(model, model_name, task_name, exp_type, test_loader):
     model.to(device)
-    PATH = "chkpt/chkpts_fromCluster/swinsmall/" + model_name.lower() + "_s1_" + exp_type + ".pth"
+    PATH = "chkpt/chkpts_fromCluster/img_res/" + model_name.lower() + "3_res_" + exp_type + ".pth"
     model.load_state_dict(torch.load(PATH))
     if task_name == "Position-Length" or task_name == "Position-Angle" or "Bar and Framed Rectangle":
         m_error = testingEpoch(model, test_loader, device)
@@ -133,8 +133,7 @@ def test_model(model, model_name, task_name, exp_type, test_loader):
         m_error = testingEpochOne(model, test_loader, device)
     json_data = {'Model': model_name, 'Task_name': task_name, 'Experiment_type': exp_type, 'MLAE': m_error}
     # Write JSON file
-    file_name = 'results/swinsmall/' + model_name + '_s1_' + exp_type + '.json'
-    os.makedirs(os.path.dirname(file_name), exist_ok=True)
+    file_name = 'results/img_res/' + model_name + 'img_res_' + exp_type + '.json'
     with open(file_name, 'w', ) as outfile:
         json.dump(json_data, outfile)
     return m_error
@@ -155,7 +154,7 @@ def testing_model(model_name, task_name, exp_type):
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         else:
-            model = SwinRegression(hidden_dim=192, layers=(2, 2, 18, 2), heads=(6, 12, 24, 48), num_outputs=SINGLE_OUTPUT, channels=3)
+            model = SwinRegression(num_outputs=SINGLE_OUTPUT, channels=3)
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
     elif task_name == "Position-Length":
@@ -168,7 +167,7 @@ def testing_model(model_name, task_name, exp_type):
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         else:
-            model = SwinRegression(hidden_dim=192, layers=(2, 2, 18, 2), heads=(6, 12, 24, 48), num_outputs=FIVE_OUTPUTS, channels=3)
+            model = SwinRegression(num_outputs=FIVE_OUTPUTS, channels=3)
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
     elif task_name == "Position-Angle":
@@ -181,7 +180,7 @@ def testing_model(model_name, task_name, exp_type):
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         else:
-            model = SwinRegression(hidden_dim=192, layers=(2, 2, 18, 2), heads=(6, 12, 24, 48), num_outputs=FIVE_OUTPUTS, channels=3)
+            model = SwinRegression(num_outputs=FIVE_OUTPUTS, channels=3)
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
     elif task_name == "Bar and Framed Rectangle":
@@ -194,7 +193,7 @@ def testing_model(model_name, task_name, exp_type):
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         else:
-            model = SwinRegression(hidden_dim=192, layers=(2, 2, 18, 2), heads=(6, 12, 24, 48), num_outputs=TWO_OUTPUTS, channels=3)
+            model = SwinRegression(num_outputs=TWO_OUTPUTS, channels=3)
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
     else:
@@ -207,7 +206,7 @@ def testing_model(model_name, task_name, exp_type):
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
         else:
-            model = SwinRegression(hidden_dim=192, layers=(2, 2, 18, 2), heads=(6, 12, 24, 48), num_outputs=SINGLE_OUTPUT, channels=3)
+            model = SwinRegression(num_outputs=SINGLE_OUTPUT, channels=3)
             MLAE = test_model(model, model_name, task_name, exp_type, test_loader)
             return MLAE
 

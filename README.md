@@ -22,7 +22,7 @@ The src directory contains the code necessary to produce the data, train the mod
 
 ### Installation 
 #### Clone and set up a virtual environment
-```commandline
+```bash
 git clone git@github.com:poonam2308/ViTsGraphicalPerception.git
 cd ViTsGraphicalPerception
 bash setup_venv.sh
@@ -30,7 +30,7 @@ source venv/bin/activate
 
 ```
 #### Manual set up alternative
-```commandline
+```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -47,3 +47,70 @@ pip install -r requirements.txt
 #### Weights
 The trained checkpoints for the experiments are available on GoogleDrive
 Access it [here](https://drive.google.com/drive/folders/16w2oXF3nrA5wI-i6CxIxIX73Z7Pf6qWF?usp=drive_link)
+
+
+### Run Experiments
+
+1. **Create required folders**
+
+```bash
+   mkdir -p src/Experiments/chkpt
+   mkdir -p src/Experiments/trainingplots
+```
+
+2. **Train a model (per task/script)**
+
+```bash
+   python src/Experiments/<name_of_file>.py
+```
+3. **Customize data sizes, batch size, epochs**
+All experiment scripts accept the following flags:
+
+--train_target <int> number of training samples
+
+--val_target <int> number of validation samples
+
+--test_target <int> number of test samples
+
+--batch_size <int> batch size
+
+--epochs <int> number of training epochs
+
+```bash
+  python src/Experiments/cvt_bfr.py --train_target 100 --val_target 20 --test_target 20 --batch_size 32  --epochs 100
+```
+
+
+###  Evaluation and Analysis 
+- Generate the analysis figures, Run the analysis scripts directly
+```bash
+python src/Analysis/Figure1Analysis.py
+python src/Analysis/Figure12Analysis.py
+python src/Analysis/Figure3Analysis.py
+python src/Analysis/Figure4Analysis.py
+python src/Analysis/WeberAnalysis.py
+```
+**Baseline evaluation (all models via one notebook)**
+1. Download the pretrained checkpoints and place them in:
+
+```bash
+TestEvaluation/chkpt/
+```
+2. Open and run:
+
+```bash
+Main_Evaluation.ipynb
+```
+
+- All evaluation results are saved as CSV files under the  results/ subfolders.
+
+
+**Ablation study (all models via one notebook)**
+
+1. Open and run:
+
+```bash
+Ablation_Evaluation.ipynb
+```
+
+-Checkpoints: total size is ~96 GB. Please email the author to request the specific ablation checkpoints you need and they will be shared individually
