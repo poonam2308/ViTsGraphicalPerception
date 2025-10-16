@@ -40,7 +40,7 @@ pip install -r requirements.txt
 #### How it works 
 - Stimulus Generation (Data): [src/ClevelandMcGill](src/ClevelandMcGill) modules to build task specific images 
 - Network: [src/Models](src/Models) modules to define the three types (CvT, Swin, vViT) network architecture used in the paper
-- Training: [src/Experiments](src/Experiments) modules to perform training on CvT, Swin and vVit on generated data. Please data is generated during the training process and it is not saved in the disk. It can be easily produced with the stimuli generation step. 
+- Training: [src/Experiments](src/Experiments) modules to perform training on CvT, Swin and vViT on generated data. Please note *data* is generated during the training process and it is not saved in the disk. It can be easily produced with the stimuli generation step. 
 - Evaluation: [src/TestEvaluation](src/TestEvaluation) modules to evaluate the trained checkpoints (weights) on the test dataset. 
 - Analysis: [src/Analysis](src/Analysis) modules to compare CvT, Swin, and vViT to human performance on the same synthetic stimuli.
 
