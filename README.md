@@ -124,7 +124,7 @@ Ablation_Evaluation.ipynb
 
 ### Replicability 
 #### Environment and Hardware
-- **OS tested ** Linux (Pop!_OS, Arch)
+- **OS tested** Linux (Pop!_OS, Arch)
 - **Python / CUDA:** [Python 3.10], [CUDA 12.4], [PyTorch 2.3] 
 - **GPU used:** [NVIDIA RTX 3090], [NVIDIA RTX 6000 Ada], [NVIDIA A100]
 - **VRAM required (training):** [≥ 16 GB VRAM recommended] 
