@@ -44,7 +44,7 @@ pip install -r requirements.txt
 - Evaluation: [src/TestEvaluation](src/TestEvaluation) modules to evaluate the trained checkpoints (weights) on the test dataset. 
 - Analysis: [src/Analysis](src/Analysis) modules to compare CvT, Swin, and vViT to human performance on the same synthetic stimuli.
 
-#### Weights
+#### Pretrained Weights
 The trained checkpoints for the experiments are available on GoogleDrive
 Access it [here](https://drive.google.com/drive/folders/16w2oXF3nrA5wI-i6CxIxIX73Z7Pf6qWF?usp=drive_link)
 
@@ -120,4 +120,19 @@ TestEvaluation/chkpt/
 
 ```bash
 Ablation_Evaluation.ipynb
+```
+
+### Replicability 
+#### Environment and Hardware
+- **OS tested ** Linux (Pop!_OS, Arch)
+- **Python / CUDA:** [Python 3.10], [CUDA 12.4], [PyTorch 2.3] 
+- **GPU used:** [NVIDIA RTX 3090], [NVIDIA RTX 6000 Ada], [NVIDIA A100]
+- **VRAM required (training):** [≥ 16 GB VRAM recommended] 
+- **VRAM required (evaluation only):** [≥ 12 GB VRAM]
+- **Typical training one model & task:** [~4.0 to 6 hours] for `[epochs=100, batch_size=32]` on the GPU above.  
+  *Note:* Data are generated on the fly during training as described in the repo. If you have less VRAM, reduce batch_size. Evaluation typically fits in ~12 GB VRAM. Random seeds are set in the experiment scripts; small numeric differences may occur across hardware/driver versions.
+- Produce evaluation results with Main_Evaluation.ipynb and analysis figures with Analysis.ipynb.
+- Or run both in one go with the convenience script:
+```bash
+replicate.sh
 ```
