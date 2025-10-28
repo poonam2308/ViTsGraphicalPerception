@@ -131,7 +131,7 @@ Ablation_Evaluation.ipynb
 - **VRAM required (evaluation only):** [≥ 12 GB VRAM]
 - **Typical training one model & task:** [~4.0 to 6 hours] for `[epochs=100, batch_size=32]` on the GPU above.  
   *Note:* Data are generated on the fly during training as described in the repo. If you have less VRAM, reduce batch_size. Evaluation typically fits in ~12 GB VRAM. Random seeds are set in the experiment scripts; small numeric differences may occur across hardware/driver versions.
-- Produce evaluation results with Main_Evaluation.ipynb and analysis figures with Analysis.ipynb.
+- Produce evaluation results with `Main_Evaluation.ipynb` and analysis figures with `Analysis.ipynb`.
 - Or run both in one go with the convenience script:
 ```bash
 replicate.sh
