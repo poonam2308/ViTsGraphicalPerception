@@ -13,3 +13,4 @@ pandas>=1.3.5
 tqdm>=4.62.3
 transformers >= 4.36.2
 wandb
+jupyter>=1.0.0
