@@ -23,7 +23,9 @@ The src directory contains the code necessary to produce the data, train the mod
 ### Installation 
 #### Clone and set up a virtual environment
 ```bash
-git clone git@github.com:poonam2308/ViTsGraphicalPerception.git
+#git clone git@github.com:poonam2308/ViTsGraphicalPerception.git 
+# to avoid SSH key issues  perform git clone via https instead of SSH
+git clone https://github.com/poonam2308/ViTsGraphicalPerception.git
 cd ViTsGraphicalPerception
 bash setup_venv.sh
 source venv/bin/activate
