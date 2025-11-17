@@ -20,7 +20,16 @@ systems and graphical perceptual modeling.
 ##  Repository structure
 The src directory contains the code necessary to produce the data, train the models for all results reported in the paper.
 
+
 ### Installation 
+
+#### Prerequisites
+on a fresh machine, you can install the basic tools with :
+```bash
+sudo apt update
+sudo apt install git python3 python3-venv python3-pip
+```
+
 #### Clone and set up a virtual environment
 ```bash
 #git clone git@github.com:poonam2308/ViTsGraphicalPerception.git 
@@ -124,7 +133,7 @@ TestEvaluation/chkpt/
 Ablation_Evaluation.ipynb
 ```
 
-### Replicability 
+### Replicability
 #### Environment and Hardware
 - **OS tested** Linux (Pop!_OS, Arch)
 - **Python / CUDA:** [Python 3.10], [CUDA 12.4], [PyTorch 2.3] 
