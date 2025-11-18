@@ -23,11 +23,37 @@ The src directory contains the code necessary to produce the data, train the mod
 
 ### Installation 
 
+#### Requirements Summary 
+- Python >= 3.10
+- Cuda >= 12.4
+- Pytorch: 2.6.0
+
+
+### Option 1: Conda
+
+#### Download the Miniconda installer
+Download the [miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#linux-terminal-installer)
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+```
+#### Run the installer 
+bash miniconda.sh 
+Then follow the prompts:
+`Accept the license (yes)
+Choose install location (default ~/miniconda3 is fine)
+When asked “Do you wish the installer to initialize Miniconda3 by running conda init?” → say yes.`
+
+
+#### Run the installer
+bash minconda.sh 
+
+
 #### Prerequisites
-on a fresh machine, you can install the basic tools with :
+on a fresh machine, you can install the basic tools with (do not forget to replace X with the python version in your machine):
 ```bash
 sudo apt update
-sudo apt install git python3 python3-venv python3-pip
+sudo apt install git python3 python3.X-venv python3-pip
 ```
 
 #### Clone and set up a virtual environment
