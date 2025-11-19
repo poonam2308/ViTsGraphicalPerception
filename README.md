@@ -120,7 +120,7 @@ Reproduce the following via single scripts
 2. Open and run:
 
 ```bash
-Analysis.ipynb
+jupyter notebook Analysis.ipynb
 ```
 
 **Baseline evaluation (all models via one single script notebook)**
@@ -133,7 +133,7 @@ TestEvaluation/chkpt/
 2. Open and run:
 
 ```bash
-Main_Evaluation.ipynb
+jupyter notebook Main_Evaluation.ipynb
 ```
 
 All evaluation results are saved as CSV files under the  results/ subfolders.
@@ -149,7 +149,7 @@ TestEvaluation/chkpt/
 2. Open and run:
 
 ```bash
-Ablation_Evaluation.ipynb
+jupyter notebook Ablation_Evaluation.ipynb
 ```
 
 ### Replicability
