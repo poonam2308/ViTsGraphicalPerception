@@ -81,7 +81,7 @@ chmod +x replicate.sh
 bash replicate.sh
 
 echo
-echo "=== ALL DONE ✅ ==="
+echo "=== ALL DONE  ==="
 echo "Conda env: $ENV_NAME"
 echo "Repo dir : $REPO_DIR"
 echo

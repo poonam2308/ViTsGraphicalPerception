@@ -28,6 +28,12 @@ The src directory contains the code necessary to produce the data, train the mod
 - Cuda >= 12.4
 - Pytorch: 2.6.0
 
+If you  want to avoid option 1  manual installation, perform the following:
+```bash
+git clone https://github.com/poonam2308/ViTsGraphicalPerception.git
+cd ViTsGraphicalPerception
+bash install_replicate.sh
+```
 #### Prerequisites
 
 ```bash
