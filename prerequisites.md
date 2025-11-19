@@ -25,3 +25,19 @@ source ~/.bashrc
 ```bash 
 conda list
 ```
+
+After verfiying the version, first Installation ends here. 
+
+
+
+> **Note (if `conda` is not found)**  
+> If your shell says `conda: command not found` after installing Miniconda/Anaconda, run the following once:
+>
+> ```bash
+> # Adjust the path if you installed Miniconda/Anaconda somewhere else
+> source ~/miniconda3/etc/profile.d/conda.sh
+> conda init bash
+> exec $SHELL
+> ```
+>
+> After this, `conda activate vitsgp` should work from any directory.

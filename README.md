@@ -45,19 +45,9 @@ Before proceeding ensure that Conda is installed on your system, see [prerequisi
 git clone https://github.com/poonam2308/ViTsGraphicalPerception.git
 cd ViTsGraphicalPerception
 bash setup_conda.sh
+#*Note* If you did not accept the license terms during the first Miniconda installation attempt, the installer will prompt you again to review and accept the terms.
 conda activate vitsgp
 ```
-
-If conda is not found,  run (once):
-```bash 
-# depending on your install path, something like:
-source ~/miniconda3/etc/profile.d/conda.sh
-# or the init helper:
-conda init bash
-exec $SHELL
-```
-After that, *conda activate vitsgp* should work from any directory.
-
 
 ### Option 2. Virtualenv + pip
 on a fresh machine, you can install the basic  python tools with (do not forget to replace X with the python version in your machine):
