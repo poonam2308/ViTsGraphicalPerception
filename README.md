@@ -28,32 +28,32 @@ The src directory contains the code necessary to produce the data, train the mod
 - Cuda >= 12.4
 - Pytorch: 2.6.0
 
-
-### Option 1: Conda
-
-#### Download the Miniconda installer
-Download the [miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#linux-terminal-installer)
-```bash
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-
-```
-#### Run the installer 
-bash miniconda.sh 
-Then follow the prompts:
-`Accept the license (yes)
-Choose install location (default ~/miniconda3 is fine)
-When asked “Do you wish the installer to initialize Miniconda3 by running conda init?” → say yes.`
-
-
-#### Run the installer
-bash minconda.sh 
-
-
 #### Prerequisites
-on a fresh machine, you can install the basic tools with (do not forget to replace X with the python version in your machine):
+
 ```bash
 sudo apt update
-sudo apt install git python3 python3.X-venv python3-pip
+sudo apt install git 
+```
+Installation of all the requirements can be either done manually or using conda option.For instructions on installing Conda, see [prerequisites.md](prerequisites.md).
+
+### Option 1: Conda
+Before proceeding ensure that Conda is installed on your system, see [prerequisites.md](prerequisites.md).
+#### Clone and set up conda evnvironment
+```bash
+#git clone git@github.com:poonam2308/ViTsGraphicalPerception.git 
+# to avoid SSH key issues  perform git clone via https instead of SSH
+git clone https://github.com/poonam2308/ViTsGraphicalPerception.git
+cd ViTsGraphicalPerception
+bash setup_conda.sh
+conda activate vitsgp
+```
+
+### Option 2. Virtualenv + pip
+on a fresh machine, you can install the basic  python tools with (do not forget to replace X with the python version in your machine):
+```bash
+sudo apt python3 python3-venv python3-pip
+# if python version specific, replace X in the below comment and run the below command
+#sudo apt install python3.X python3.X-venv python3-pip
 ```
 
 #### Clone and set up a virtual environment
@@ -64,17 +64,9 @@ git clone https://github.com/poonam2308/ViTsGraphicalPerception.git
 cd ViTsGraphicalPerception
 bash setup_venv.sh
 source venv/bin/activate
-
-```
-#### Manual set up alternative
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-
 ```
 
-#### How it works 
+### How it works 
 - Stimulus Generation (Data): [src/ClevelandMcGill](src/ClevelandMcGill) modules to build task specific images 
 - Network: [src/Models](src/Models) modules to define the three types (CvT, Swin, vViT) network architecture used in the paper
 - Training: [src/Experiments](src/Experiments) modules to perform training on CvT, Swin and vViT on generated data. Please note *data* is generated during the training process and it is not saved in the disk. It can be easily produced with the stimuli generation step. 
@@ -167,9 +159,9 @@ Ablation_Evaluation.ipynb
 - **VRAM required (training):** [≥ 16 GB VRAM recommended] 
 - **VRAM required (evaluation only):** [≥ 12 GB VRAM]
 - **Typical training one model & task:** [~4.0 to 6 hours] for `[epochs=100, batch_size=32]` on the GPU above.  
-  *Note:* Data are generated on the fly during training as described in the repo. If you have less VRAM, reduce batch_size. Evaluation typically fits in ~12 GB VRAM. Random seeds are set in the experiment scripts; small numeric differences may occur across hardware/driver versions.
+  *Note:* Data are generated on the fly during training as described in the repo. If you have less *VRAM(smaller GPUs)*, reduce batch_size. Evaluation typically fits in ~12 GB VRAM. Random seeds are set in the experiment scripts; small numeric differences may occur across hardware/driver versions.
 - Produce evaluation results with `Main_Evaluation.ipynb` and analysis figures with `Analysis.ipynb`.
-- Or run both in one go with the convenience script:
+- Or run both in one go with the convenience script; this script here is *reproducing the results and figures from the paper using the provided pretrained checkpoints, not re-training models from scratch*:
 ```bash
 replicate.sh
 ```
