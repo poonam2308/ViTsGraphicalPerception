@@ -1,6 +1,7 @@
-# ViTsGraphicalPerception
+# ViTsGraphicalPerception [![](https://www.replicabilitystamp.org/logo/Reproducibility-small.png)](http://www.replicabilitystamp.org#https-github-com-poonam2308-vitsgraphicalperception)
 
 ![Graphical Abstract](src/Images/GP.png)
+
 
 **Evaluating graphical perception capabilities of Vision Transformers**  
 Vision Transformers (ViTs) have emerged as a powerful alternative to convolutional
