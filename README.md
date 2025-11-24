@@ -1,4 +1,5 @@
 # ViTsGraphicalPerception [![](https://www.replicabilitystamp.org/logo/Reproducibility-small.png)](http://www.replicabilitystamp.org#https-github-com-poonam2308-vitsgraphicalperception)
+[DOI](https://doi.org/10.1016/j.cag.2025.104458)
 
 ![Graphical Abstract](src/Images/GP.png)
 
